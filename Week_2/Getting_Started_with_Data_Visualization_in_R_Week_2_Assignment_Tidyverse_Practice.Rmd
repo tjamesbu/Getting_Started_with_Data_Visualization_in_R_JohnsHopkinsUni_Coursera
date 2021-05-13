@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+dat <- drop_na(read_csv(url("https://www.dropbox.com/s/uhfstf6g36ghxwp/cces_sample_coursera.csv?raw=1")))
+```
+
+```{r}
+select(dat,"educ","edloan","employ","CC18_308a")
+recode(dat$CC18_308a, `1`="Strongly Agree", `1`="Somewhat Agree", `0`="Somewhat Disagree", `0`="Strongly Disagree")
+
+```
+
+```{r}
+p10 <- filter(dat, employ==1 & marstat==1)
+summarise(p10,Mean_Religion_Imp=mean(pew_religimp),Median_Religion_Imp=median(pew_religimp))
+```
